@@ -1,0 +1,20 @@
+// package.json
+{
+  "name": "puppeteer-vercel",
+  "version": "1.0.0",
+  "description": "A basic Puppeteer server running on Vercel",
+  "main": "api/fetch.js",
+  "scripts": {
+    "start": "node api/fetch.js",
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "puppeteer": "^19.0.0"
+  },
+  "devDependencies": {
+    "vercel": "^28.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
