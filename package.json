@@ -5,7 +5,7 @@
   "main": "api/fetch.js",
   "scripts": {
     "start": "node api/fetch.js",
-    "dev": "vercel dev",
+    "dev": "vercel dev"
   },
   "dependencies": {
     "chrome-aws-lambda": "^10.1.0",
