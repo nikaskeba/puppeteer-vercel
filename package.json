@@ -5,16 +5,17 @@
   "main": "api/fetch.js",
   "scripts": {
     "start": "node api/fetch.js",
-    "dev": "vercel dev"
+    "dev": "vercel dev",
+    "build": "vercel build"
+  },
+  "dependencies": {
+    "chrome-aws-lambda": "^10.1.0",
+    "puppeteer-core": "^19.11.1"
   },
   "devDependencies": {
     "vercel": "^28.0.0"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "chrome-aws-lambda": "^10.1.0",
-    "puppeteer-core": "^24.1.0"
-  }
+  "license": "ISC"
 }
