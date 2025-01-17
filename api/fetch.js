@@ -1,4 +1,4 @@
-const chromium = require('chrome-aws-lambda');
+const chromium = require('@sparticuz/chrome-aws-lambda');
 const puppeteer = require('puppeteer-core');
 
 module.exports = async (req, res) => {
@@ -8,9 +8,14 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Please provide a URL as a query parameter.' });
   }
 
-  // Validate URL format
+  // Validate URL format and restrict domains (optional for security)
   try {
-    new URL(url);
+    const parsedUrl = new URL(url);
+    const allowedDomains = ['freestufftimes.com']; // Add more domains as needed
+
+    if (!allowedDomains.includes(parsedUrl.hostname)) {
+      return res.status(403).json({ error: 'Domain not allowed.' });
+    }
   } catch (err) {
     return res.status(400).json({ error: 'Invalid URL format.' });
   }
@@ -18,7 +23,7 @@ module.exports = async (req, res) => {
   let browser = null;
 
   try {
-    // Launch Puppeteer with chrome-aws-lambda settings
+    // Launch Puppeteer with @sparticuz/chrome-aws-lambda settings
     browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
@@ -33,7 +38,7 @@ module.exports = async (req, res) => {
     await page.setRequestInterception(true);
     page.on('request', (req) => {
       const resourceType = req.resourceType();
-      if (['image', 'stylesheet', 'font', 'media'].includes(resourceType)) {
+      if (['image', 'stylesheet', 'font', 'media', 'script'].includes(resourceType)) {
         req.abort();
       } else {
         req.continue();
